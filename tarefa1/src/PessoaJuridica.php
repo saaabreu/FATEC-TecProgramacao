@@ -8,22 +8,15 @@ class PessoaJuridica extends Pessoa
     public function __construct($codigo, $nome, $endereco, $numero, $telefone, $cnpj, $limiteCredito)
     {
         parent::__construct($codigo, $nome, $endereco, $numero, $telefone);
-        $this->formatarCnpj($cnpj);
-        $this->cnpj = $cnpj;
+        $this->cnpj = $this->validarCnpj($cnpj);
         $this->limiteCredito = $limiteCredito;
     }
 
-    public function exibirCnpj() 
-    {
-        return $this->cnpj;
+    public function exibirDadosCadastrais() {
+        echo "{$this->exibirDadosPessoais()}\n CNPJ: {$this->cnpj} \n Limite de Crédito: {$this->limiteCredito}";
     }
 
-    public function exibirLimiteCredito() 
-    {
-        return $this->limiteCredito;
-    }
-
-    private function formatarCnpj($cnpj)
+    private function validarCnpj($cnpj)
     {
         $cnpj = preg_replace("/[^0-9]/", "", $cnpj);
         if (strlen($cnpj) != 14)
@@ -36,7 +29,7 @@ class PessoaJuridica extends Pessoa
         $bloco_4 = substr($cnpj,8,4);
         $dig_verificador = substr($cnpj,-2);
         $cnpj = $bloco_1.".".$bloco_2.".".$bloco_3."/".$bloco_4."-".$dig_verificador;
-        echo $cnpj;
+        return $cnpj;
     }
 
 }

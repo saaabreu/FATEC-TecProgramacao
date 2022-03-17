@@ -17,4 +17,8 @@ class Pessoa
         $this->telefone = $telefone;
     }
 
+    protected function exibirDadosPessoais() {
+        echo " Nome: {$this->nome} \n Endereço: {$this->endereco}, Número: {$this->numero} \n Telefone: {$this->telefone}";
+    }
+
 }
